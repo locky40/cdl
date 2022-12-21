@@ -1,0 +1,33 @@
+%{
+#include<stdio.h>
+int line=0,word=0,ch=0;
+%}
+%%
+[a-z|A-Z|0-9] {ch++;}
+“ “ {word++;}
+“\n”+ {line++; word++;}
+. {}
+%%
+main(int argc, char *argv[])
+{
+yyin=fopen(argv[1],"r");
+yylex();
+printf(" This File contains ...\n");
+printf("Lines: %d\nWords:%d\nCharacters: %d\n”,line,word,ch}
+
+
+
+/*
+inp.txt
+hello world
+how r u
+Output
+----------
+[exam044@localhost cs7]$ flex wc.l
+[exam044@localhost cs7]$ gcc lex.yy.c -lfl
+[exam044@localhost cs7]$ ./a.out inp.txt
+File contains...
+lines: 2
+words:5
+characters: 18
+*/

@@ -1,0 +1,35 @@
+%{
+int v=0,c=0;
+%}
+%%
+[aeiouAEIOU] {v++;}
+[a-zA-Z] {c++;}
+[\n] {
+
+printf("Number of vowels are : %d\n",v);
+v=0;
+printf("Number of consonants are : %d\n",c);
+c=0;
+
+}
+%%
+int main()
+{
+printf("Enter the string of vowels and consonants are:");
+yylex();
+}
+
+int yywrap()
+{
+return 1;
+}
+
+
+
+
+/*
+Output
+Enter the string of vowels and consonants are: Hello world
+Number of vowels are : 3
+Number of consonants are : 7
+*/

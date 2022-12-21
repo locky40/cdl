@@ -1,0 +1,43 @@
+%{
+#include<stdio.h>
+int cnt1=0,cnt2=0,cnt3=0;
+
+
+%}
+
+
+%%
+[(] {cnt1++;}
+[)] {cnt1--;}
+[{] {cnt2++;}
+[}] {cnt2--;}
+[[] {cnt3++;}
+[]] {cnt3--;}
+[a-z] {}
+[A-Z] {}
+[0-9] {}
+[+,*,/,-] {}
+. {}
+[\n] {
+	if(!cnt1 && !cnt2 && !cnt3)
+		printf("Parenthesis matching\n");
+	else printf("Parenthesis not matching\n");
+	cnt1=0; cnt2=0; cnt3=0;
+}
+%%
+main(int argc, char *argv[])
+{
+	yyin=fopen(argv[1],"r");
+	yylex();
+}
+
+
+/*
+exp1.txt
+{[([)]}
+
+
+exp.txt
+(a+b)(c+d)]]]
+[a+b](n+m)
+*/
